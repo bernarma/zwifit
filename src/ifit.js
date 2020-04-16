@@ -130,7 +130,7 @@ function onMessage(message) {
 		parsed = parsed.values;
 	}
 	for (let parsedKey in parsed) {
-		if (parsed.hasOwnProperty(parsedKey)) {
+		if (Object.prototype.hasOwnProperty.call(parsed, parsedKey)) {
 			current[parsedKey] = parsed[parsedKey];
 		}
 	}
@@ -232,7 +232,7 @@ function test(ip) {
 					}
 				}
 			};
-		client.on('connectFailed', failed => finished(false));
+		client.on('connectFailed', () => finished(false));
 		client.on('connect', connection => {
 			if (!scanning) {
 				if (client) {
@@ -241,8 +241,8 @@ function test(ip) {
 				}
 				return;
 			}
-			connection.on('error', err => finished(false));
-			connection.on('close', closed => finished(false));
+			connection.on('error', () => finished(false));
+			connection.on('close', () => finished(false));
 			connection.on('message', message => {
 				let parsed = safeJSONParse(message ? message.utf8Data || message.data : null);
 				if (parsed.values) {

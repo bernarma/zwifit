@@ -54,7 +54,7 @@ function load() {
 function toJSON() {
 	let settings = {};
 	for (let key in exports) {
-		if (exports.hasOwnProperty(key) && typeof exports[key] !== 'function') {
+		if (Object.prototype.hasOwnProperty.call(exports, key) && typeof exports[key] !== 'function') {
 			settings[key] = exports[key];
 		}
 	}
@@ -63,7 +63,7 @@ function toJSON() {
 
 function fromJSON(json) {
 	for (let key in json) {
-		if (json.hasOwnProperty(key)) {
+		if (Object.prototype.hasOwnProperty.call(json, key)) {
 			exports[key] = json[key];
 		}
 	}

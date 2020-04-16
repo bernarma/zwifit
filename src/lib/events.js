@@ -47,11 +47,11 @@ function clearEventListeners() {
 	return exports;
 }
 
-function delayedFireEvent(time, name, data) {
+function delayedFireEvent(time) {
 	let args = Array.prototype.slice.call(arguments, 1);
 	setTimeout(() => {
 		fireEvent.apply(exports, args);
-		time = name = data = null;
+		time = null;
 	}, time);
 	return exports;
 }
